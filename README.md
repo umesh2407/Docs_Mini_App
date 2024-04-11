@@ -1,8 +1,32 @@
-# React + Vite
+# React Notes Animated
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based web app for creating and managing notes with smooth animated transitions using "Framer Motion".
 
-Currently, two official plugins are available:
+![notes](notes1.0.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+
+- Enjoy smooth animated transitions for a delightful user experience.
+- Responsive design ensures compatibility across devices.
+
+## Installation
+
+1. Clone the repository.
+2. Install dependencies with `npm install`
+3. Start the development server with `npm run dev`
+
+## Technologies Used
+
+- React
+- Tailwind CSS for styling
+- Framer motion for smooth transitions
+- React Icons for icons
+
+## License
+
+This project is licensed under the MIT License.
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or pull requests.
+
