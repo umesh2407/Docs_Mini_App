@@ -1,42 +1,72 @@
-import React, {useRef} from 'react'
-import Card from './Card'
+import React, { useState, useEffect, useRef } from 'react';
+import Card from './Card';
+import InputCard from './InputCard';
+import ConfirmationPopup from './ConfirmationPopup';
 
 function Foreground() {
-    const ref = useRef(null);
-    const data = [
-        {
-            desc: "Hello my name is Umesh Choudhary ...",
-            filesize:".3mb",
-            close: true,
-            tag:{isOpen:true, tagTitle:"Download Now", tagColor:"green"},
-        },
-        {
-            desc: "This is another entry with some description...",
-            filesize:"1.2mb",
-            close: false,
-            tag:{isOpen:true, tagTitle:"View Details", tagColor:"blue"},
-        },
-        {
-            desc: "Sample entry for data...",
-            filesize:"0.8mb",
-            close: true,
-            tag:{isOpen:false, tagTitle:"Preview", tagColor:"blue"},
-        },
-        {
-            desc: "Yet another data entry...",
-            filesize:"0.6mb",
-            close: false,
-            tag:{isOpen:true, tagTitle:"Download File", tagColor:"green"},
-        }
-    ];
-    
+  const ref = useRef(null);
+  const [notes, setNotes] = useState([]);
+  const [newNote, setNewNote] = useState({
+    desc: "",
+    filesize: "",
+    close: true,
+    tag: { isOpen: true, tagTitle: "", tagColor: "green" },
+  });
+  const [showPopup, setShowPopup] = useState(false);
+  const [noteToDelete, setNoteToDelete] = useState(null);
+
+  useEffect(() => {
+    const storedNotes = JSON.parse(localStorage.getItem('notes')) || [];
+    setNotes(storedNotes);
+  }, []);
+
+  const addNote = () => {
+    const updatedNotes = [...notes, newNote];
+    setNotes(updatedNotes);
+    localStorage.setItem('notes', JSON.stringify(updatedNotes));
+
+    setNewNote({
+      desc: "",
+      filesize: "",
+      close: true,
+      tag: { isOpen: true, tagTitle: "", tagColor: "green" },
+    });
+  };
+
+  const handleDelete = (note) => {
+    setNoteToDelete(note);
+    setShowPopup(true);
+  };
+
+  const confirmDelete = () => {
+    const updatedNotes = notes.filter(note => note !== noteToDelete);
+    setNotes(updatedNotes);
+    localStorage.setItem('notes', JSON.stringify(updatedNotes));
+    setShowPopup(false);
+  };
+
+  const cancelDelete = () => {
+    setShowPopup(false);
+  };
+
   return (
-    <div ref={ref} className='fixed top-0 left-0 z-[3] w-full h-full flex gap-10 flex-wrap p-5'>
-        {data.map((item,index)=>(
-    <Card data={item} reference={ref}/>)
-    )}
+    <div ref={ref} className='relative w-full h-full p-5'>
+      {notes.map((note, index) => (
+        <Card key={index} data={note} reference={ref} onDelete={handleDelete} />
+      ))}
+
+      {/* InputCard Component for adding new notes */}
+      <InputCard newNote={newNote} setNewNote={setNewNote} addNote={addNote} />
+
+      {showPopup && (
+        <ConfirmationPopup 
+          message="Are you sure you want to delete this note?" 
+          onConfirm={confirmDelete} 
+          onCancel={cancelDelete} 
+        />
+      )}
     </div>
-  )
+  );
 }
 
-export default Foreground
+export default Foreground;
