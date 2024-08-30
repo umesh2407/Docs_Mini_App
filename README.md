@@ -1,4 +1,4 @@
-# React Notes Animated
+# React Notes Animated Web App
 
 A React-based web app for creating and managing notes with smooth animated transitions using "Framer Motion".
 
@@ -17,7 +17,7 @@ A React-based web app for creating and managing notes with smooth animated trans
 
 ## Technologies Used
 
-- React
+- React Js
 - Tailwind CSS for styling
 - Framer motion for smooth transitions
 - React Icons for icons
