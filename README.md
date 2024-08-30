@@ -2,7 +2,8 @@
 
 A React-based web app for creating and managing notes with smooth animated transitions using "Framer Motion".
 
-![notes](notes1.0.png)
+<img width="960" alt="Screenshot 2024-08-30 210057" src="https://github.com/user-attachments/assets/d600c2f1-6644-4394-8185-c718667bd175">
+
 
 ## Features
 
